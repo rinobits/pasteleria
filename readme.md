@@ -8,12 +8,14 @@
 >## Métodos
 <hr>
 
-**LOGIN**  | **PARA**
+## **Login**
+**MÉTODO**  | **PARA**
 ------------ | -------------
 POST         | Autenticación
 <hr>
 
-**USUARIO**  | **PARA**
+## **Usuarios**
+**MÉTODO**  | **PARA**
 ------------ | -------------
 GET          | Obtener todos 
 GET:{id}     | Obtener uno
