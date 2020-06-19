@@ -7,6 +7,11 @@
 
 >## Métodos
 
+**LOGIN**  | **PARA**
+------------ | -------------
+POST         | Autenticación
+<hr>
+
 **USUARIO**  | **PARA**
 ------------ | -------------
 GET          | Obtener todos 
