@@ -6,7 +6,7 @@ const routes                              = require('./app/routes');
 const {config}                            = require('./config');
 const notFoundHandler                     = require('./utils/middlewares/notFoundHandler');
 const {logError, wrapError, errorHandler} = require('./utils/middlewares/errorsHandlers');
-const app    
+const app                                 = express();
 
 // cors
 if(config.dev){
