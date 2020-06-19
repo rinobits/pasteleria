@@ -30,12 +30,19 @@ class UserServices{
     }
     updateUserById(id, body){
         return new Promise((resolve, reject) => {
-            Users.update(body, {
-                where: {id: id}
-            })
-            .then(r => {
-                if(r == 1) resolve({"MODIFY DATA:": true})
-                else reject({"MODIFY DATA:": false})
+            bcrypt.hash(body.userPassword, 10) // en vez de hacer el find, creamos el hash y buscamos después
+            .then(hash => {
+                body.userPassword = hash;
+                Users.update(body, {
+                    where: {id: id}
+                })
+                .then(r => {
+                    if(r == 1){
+                        resolve({"MODIFY DATA:": true});
+                    }
+                    else reject({"MODIFY DATA:": false})
+                })
+                .catch(e => reject(e));
             })
             .catch(e => reject(e));
         });
