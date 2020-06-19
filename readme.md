@@ -7,13 +7,23 @@
 
 >## Métodos
 
-- ### **Login**
+- ### **Login /auth**
     **MÉTODO**  | **PARA**
     ------------ | -------------
     POST         | Autenticación
     <hr>
 
-- ### **Usuarios**
+- ### **Usuarios /usuarios**
+    **MÉTODO**  | **PARA**
+    ------------ | -------------
+    GET          | Obtener todos 
+    GET:{id}     | Obtener uno
+    PUT:{id} *   | Edita uno
+    POST *       | Crea uno
+    DELETE:{id} *| Elimina uno
+    <hr>
+
+- ### **Pedidos /pedidos**
     **MÉTODO**  | **PARA**
     ------------ | -------------
     GET          | Obtener todos 
