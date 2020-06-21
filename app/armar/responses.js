@@ -2,65 +2,58 @@
 const boom                      = require('@hapi/boom');
 
 // imports & consts 
-const OrderServices = require('./services');
-const orderServices = new OrderServices();
+const ArmarServices = require('./services');
+const armarServices = new ArmarServices();
 
-const searchOrders = () => {
+const armarFindAll = () => {
     return (req, res, next) => {
-        orderServices.findOrders()
+        armarServices.armarFindAll()
             .then(responses => {
-                let i = 0;
-                let tmp = []
-                for(i = 0; i < responses.length; i++){
-                    tmp[i] = responses[i].dataValues;
-                }
-                responses = tmp;
-                res.json([...responses])
+                res.json(responses)
             })
             .catch(e => next(boom.badImplementation(e)))
         }
 }
-const searchOrderById = () => {
+const armarFindById = () => {
     return (req, res, next) => {
         const {id} = req.params;
-        orderServices.findOrderById(id)
+        armarServices.armarFindById(id)
             .then(response => {
-                delete response.orderPassword;
-                res.json(response)
+                res.json(response);
             })
             .catch(e => next(boom.badImplementation(e)))
         }
 }
-const createOrder = () => {
+const armarCreate = () => {
        return (req, res, next) => {
             const {body} = req;
-            orderServices.createOrder(body)
+            armarServices.armarCreate(body)
             .then(response => res.json({"CREATED": true}))
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const updateOrderById = () => {
+const armarUpdateById = () => {
     return (req, res, next) => {
         const {body} = req;
         const {id}   = req.params;
-        orderServices.updateOrderById(id, body) // (!)
+        armarServices.armarUpdateById(id, body) // (!)
         .then(response => res.json({"MODIFY DATA": true}))
         .catch(e => next(boom.badImplementation(e)))
     }
 }
-const deleteOrderById = () => {
+const armarDeleteById = () => {
     return (req, res, next) => {
         const {id} = req.params
-        orderServices.deleteOrderById(id)
+        armarServices.armarDeleteById(id)
             .then(response => res.json({"DELETE DATA": true}))
             .catch(e => next(boom.badImplementation(e)))
     }
 }
 module.exports = {
-    searchOrders,
-    searchOrderById,
-    createOrder,
-    updateOrderById,
-    deleteOrderById
+    armarFindAll,
+    armarFindById,
+    armarCreate,
+    armarUpdateById,
+    armarDeleteById
 };
 

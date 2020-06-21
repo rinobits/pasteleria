@@ -1,64 +1,59 @@
 // packages
 const boom                      = require('@hapi/boom');
 // imports & consts
-const UserServices              = require('./services');
-const userServices              = new UserServices();
+const TamanoServices              = require('./services');
+const tamanoServices              = new TamanoServices();
 
-const usersFindAll = () => {
+const tamanosFindAll = () => {
     return (req, res, next) => {
-        userServices.usersFindAll()
+        tamanoServices.tamanosFindAll()
             .then(r => {
-                for(let i = 0; i < r.users.length; i++){
-                    delete r.users[i].dataValues.userPassword;
-                }
-                i = 0;
-                r = [...responses.users];
+                //r = [...responses.users];
                 res.json(r);
             })
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersFindById = () => {
+const tamanosFindById = () => {
     return (req, res, next) => {
         const {id} = req.params;
-        userServices.usersFindById(id)
+        tamanoServices.tamanosFindById(id)
             .then(r => {
-                delete r.user.dataValues.userPassword;
-                res.json(r.user.dataValues)
+                res.json(r)
             })
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersCreate = () => {
+const tamanosCreate = () => {
     return (req, res, next) => {
         const {body} = req;
-        userServices.usersCreate(body)
+        tamanoServices.tamanosCreate(body)
             .then(r  => res.json({"CREATED": true}))
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersUpdateById = () => {
+const tamanosUpdateById = () => {
     return (req, res, next) => {
         const {body} = req;
         const {id}   = req.params;
-        userServices.usersUpdateById(id, body) 
+        tamanoServices.tamanosUpdateById(id, body) 
         .then(r  => res.json({"MODIFY DATA": true}))
         .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersDeleteById = () => {
+const tamanosDeleteById = () => {
     return (req, res, next) => {
         const {id} = req.params;
-        userServices.usersDeleteById(id)
+        tamanoServices.tamanosDeleteById(id)
             .then(r  => res.json({'DELETE DATA' : true}))
             .catch(e => next(boom.badImplementation(e)))
     }
 }
 module.exports = {
-    usersFindAll,
-    usersFindById,
-    usersCreate,
-    usersUpdateById,
-    usersDeleteById
+    tamanosFindAll,
+    tamanosFindById,
+    tamanosCreate,
+    tamanosUpdateById,
+    tamanosDeleteById
 };
 

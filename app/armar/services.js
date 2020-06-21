@@ -1,32 +1,30 @@
-const {Orders} = require('../../lib/database');
-class OrderServices{
-    findOrders(){
+const {Armar} = require('../../lib/database');
+class ArmarServices{
+    armarFindAll(){
         return new Promise((resolve, reject) => {
-            Orders.findAll()
+            Armar.findAll({where:{estado:1}})
                 .then(r => resolve(r))
                 .catch(e => reject(e));
         });
     }
-    findOrderById(id){
+    armarFindById(id){
         return new Promise((resolve, reject) => {
-            Orders.findByPk(id)
+            Armar.findAll(id, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
             .then(r => resolve(r))
             .catch(e => reject(e));
         });
     }
-    createOrder(body){
+    armarCreate(body){
         return new Promise((resolve, reject) => {
             console.log(body);
-            Orders.create(body)
+            Armar.create(body)
             .then(r => resolve(r))
             .catch(e => reject(e));
         });
     }
-    updateOrderById(id, body){
+    armarUpdateById(id, body){
         return new Promise((resolve, reject) => {
-            Orders.update(body, {
-                where: {id: id}
-            })
+            Armar.update(body, { where: {id: id}})
             .then(r => {
                 if(r == 1) resolve({"MODIFY DATA": true})
                 else reject({"MODIFY DATA:": false})
@@ -34,11 +32,9 @@ class OrderServices{
             .catch(e => reject(e));
         });
     }
-    deleteOrderById(id){
+    armarDeleteById(id){
         return new Promise((resolve, reject) => {
-            Orders.destroy({
-                where: {id}
-            })
+            Armar.destroy({ where: {[Op.and]: [{id: id}, {estado: 1}]}})
             .then(r => {
                 if(r == 1) resolve({"DELETE DATA": true})
                 else reject({"DELETE DATA:": false})
@@ -48,4 +44,4 @@ class OrderServices{
     }
     
 }
-module.exports = OrderServices;
+module.exports = ArmarServices;

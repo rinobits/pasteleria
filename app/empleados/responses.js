@@ -1,64 +1,59 @@
 // packages
 const boom                      = require('@hapi/boom');
 // imports & consts
-const UserServices              = require('./services');
-const userServices              = new UserServices();
+const EmpleadoServices          = require('./services');
+const empleadoServices          = new EmpleadoServices();
 
-const usersFindAll = () => {
+const empleadosFindAll = () => {
     return (req, res, next) => {
-        userServices.usersFindAll()
+        empleadoServices.empleadosFindAll()
             .then(r => {
-                for(let i = 0; i < r.users.length; i++){
-                    delete r.users[i].dataValues.userPassword;
-                }
-                i = 0;
-                r = [...responses.users];
+                //r = [...r.empleados];
                 res.json(r);
             })
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersFindById = () => {
+const empleadosFindById = () => {
     return (req, res, next) => {
         const {id} = req.params;
-        userServices.usersFindById(id)
+        empleadoServices.empleadosFindById(id)
             .then(r => {
-                delete r.user.dataValues.userPassword;
-                res.json(r.user.dataValues)
+                res.json(r)
             })
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersCreate = () => {
+const empleadosCreate = () => {
     return (req, res, next) => {
         const {body} = req;
-        userServices.usersCreate(body)
+        empleadoServices.empleadosCreate(body)
             .then(r  => res.json({"CREATED": true}))
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersUpdateById = () => {
+const empleadosUpdateById = () => {
     return (req, res, next) => {
         const {body} = req;
         const {id}   = req.params;
-        userServices.usersUpdateById(id, body) 
+        empleadoServices.empleadosUpdateById(id, body) 
         .then(r  => res.json({"MODIFY DATA": true}))
         .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersDeleteById = () => {
+const empleadosDeleteById = () => {
     return (req, res, next) => {
         const {id} = req.params;
-        userServices.usersDeleteById(id)
+        empleadoServices.empleadosDeleteById(id)
             .then(r  => res.json({'DELETE DATA' : true}))
             .catch(e => next(boom.badImplementation(e)))
     }
 }
 module.exports = {
-    usersFindAll,
-    usersFindById,
-    usersCreate,
-    usersUpdateById,
-    usersDeleteById
+    empleadosFindAll,
+    empleadosFindById,
+    empleadosCreate,
+    empleadosUpdateById,
+    empleadosDeleteById
 };
 

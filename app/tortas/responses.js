@@ -1,64 +1,59 @@
 // packages
 const boom                      = require('@hapi/boom');
 // imports & consts
-const UserServices              = require('./services');
-const userServices              = new UserServices();
+const TortaServices              = require('./services');
+const tortaServices              = new TortaServices();
 
-const usersFindAll = () => {
+const tortasFindAll = () => {
     return (req, res, next) => {
-        userServices.usersFindAll()
+        tortaServices.tortasFindAll()
             .then(r => {
-                for(let i = 0; i < r.users.length; i++){
-                    delete r.users[i].dataValues.userPassword;
-                }
-                i = 0;
-                r = [...responses.users];
+                //r = [...responses.users];
                 res.json(r);
             })
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersFindById = () => {
+const tortasFindById = () => {
     return (req, res, next) => {
         const {id} = req.params;
-        userServices.usersFindById(id)
+        tortaServices.tortasFindById(id)
             .then(r => {
-                delete r.user.dataValues.userPassword;
-                res.json(r.user.dataValues)
+                res.json(r)
             })
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersCreate = () => {
+const tortasCreate = () => {
     return (req, res, next) => {
         const {body} = req;
-        userServices.usersCreate(body)
+        tortaServices.tortasCreate(body)
             .then(r  => res.json({"CREATED": true}))
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersUpdateById = () => {
+const tortasUpdateById = () => {
     return (req, res, next) => {
         const {body} = req;
         const {id}   = req.params;
-        userServices.usersUpdateById(id, body) 
+        tortaServices.tortasUpdateById(id, body) 
         .then(r  => res.json({"MODIFY DATA": true}))
         .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersDeleteById = () => {
+const tortasDeleteById = () => {
     return (req, res, next) => {
         const {id} = req.params;
-        userServices.usersDeleteById(id)
+        tortaServices.tortasDeleteById(id)
             .then(r  => res.json({'DELETE DATA' : true}))
             .catch(e => next(boom.badImplementation(e)))
     }
 }
 module.exports = {
-    usersFindAll,
-    usersFindById,
-    usersCreate,
-    usersUpdateById,
-    usersDeleteById
+    tortasFindAll,
+    tortasFindById,
+    tortasCreate,
+    tortasUpdateById,
+    tortasDeleteById
 };
 

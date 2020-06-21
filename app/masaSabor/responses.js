@@ -1,64 +1,59 @@
 // packages
 const boom                      = require('@hapi/boom');
 // imports & consts
-const UserServices              = require('./services');
-const userServices              = new UserServices();
+const MasaSaborServices              = require('./services');
+const masaSaborServices              = new MasaSaborServices();
 
-const usersFindAll = () => {
+const masaSaborFindAll = () => {
     return (req, res, next) => {
-        userServices.usersFindAll()
+        masaSaborServices.masaSaborFindAll()
             .then(r => {
-                for(let i = 0; i < r.users.length; i++){
-                    delete r.users[i].dataValues.userPassword;
-                }
-                i = 0;
-                r = [...responses.users];
+                //r = [...responses.users];
                 res.json(r);
             })
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersFindById = () => {
+const masaSaborFindById = () => {
     return (req, res, next) => {
         const {id} = req.params;
-        userServices.usersFindById(id)
+        masaSaborServices.masaSaborFindById(id)
             .then(r => {
-                delete r.user.dataValues.userPassword;
-                res.json(r.user.dataValues)
+                res.json(r)
             })
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersCreate = () => {
+const masaSaborCreate = () => {
     return (req, res, next) => {
         const {body} = req;
-        userServices.usersCreate(body)
+        masaSaborServices.masaSaborCreate(body)
             .then(r  => res.json({"CREATED": true}))
             .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersUpdateById = () => {
+const masaSaborUpdateById = () => {
     return (req, res, next) => {
         const {body} = req;
         const {id}   = req.params;
-        userServices.usersUpdateById(id, body) 
+        masaSaborServices.masaSaborUpdateById(id, body) 
         .then(r  => res.json({"MODIFY DATA": true}))
         .catch(e => next(boom.badImplementation(e)))
     }
 }
-const usersDeleteById = () => {
+const masaSaborDeleteById = () => {
     return (req, res, next) => {
         const {id} = req.params;
-        userServices.usersDeleteById(id)
+        masaSaborServices.masaSaborDeleteById(id)
             .then(r  => res.json({'DELETE DATA' : true}))
             .catch(e => next(boom.badImplementation(e)))
     }
 }
 module.exports = {
-    usersFindAll,
-    usersFindById,
-    usersCreate,
-    usersUpdateById,
-    usersDeleteById
+    masaSaborFindAll,
+    masaSaborFindById,
+    masaSaborCreate,
+    masaSaborUpdateById,
+    masaSaborDeleteById
 };
 

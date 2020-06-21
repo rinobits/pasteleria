@@ -1,21 +1,21 @@
 const {Users}                   = require('../../lib/database');
 const bcrypt                    = require('bcrypt'); 
 class UserServices{
-    findUsers(){
+    usersFindAll(){
         return new Promise((resolve, reject) => {
-            Users.findAll()
+            Users.findAll({where:{estado:1}})
                 .then(r => resolve({users: r})) 
                 .catch(e => reject(e));
         });
     }
-    findUserById(id){
+    usersFindById(id){
         return new Promise((resolve, reject) => {
-            Users.findByPk(id)
+            Users.findAll(id, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
                 .then(r => resolve({'user':r}))
                 .catch(e => reject(e));
         });
     }
-    createUser(body){
+    usersCreate(body){
         return new Promise((resolve, reject) => {
             bcrypt.hash(body.userPassword, 10)
             .then(hash => {
@@ -28,33 +28,29 @@ class UserServices{
             .catch(e => reject(e));
         });
     }
-    updateUserById(id, body){
+    usersUpdateById(id, body){
         return new Promise((resolve, reject) => {
-            bcrypt.hash(body.userPassword, 10) // en vez de hacer el find, creamos el hash y buscamos después
-            .then(hash => {
-                body.userPassword = hash;
-                Users.update(body, {
-                    where: {id: id}
-                })
-                .then(r => {
-                    if(r == 1){
-                        resolve({"MODIFY DATA:": true});
-                    }
-                    else reject({"MODIFY DATA:": false})
-                })
+            if(body.userPassword){
+                bcrypt.hash(body.userPassword, 10) 
+                .then(hash => body.userPassword = hash)
                 .catch(e => reject(e));
+            }
+            Users.update(body, { where: {id: id}})
+            .then(r => {
+                if(r == 1) resolve({"MODIFY DATA:": true});
+                else reject({"MODIFY DATA:": false})
             })
             .catch(e => reject(e));
         });
     }
-    deleteUserById(id){
+    usersDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Users.destroy({
-                where: {id}
-            })
+            Users.update(estado, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
             .then(r => {
-                if(r == 1) resolve({"DELETE DATA:": true});
-                else reject({"DELETE DATA:": false})
+                if(r == 1){
+                    resolve({"MODIFY DATA:": true});
+                }
+                else reject({"MODIFY DATA:": false})
             })
             .catch(e => reject(e));
         });
