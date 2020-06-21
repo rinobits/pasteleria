@@ -1,21 +1,17 @@
 module.exports = (sequelize, type) => {
-    return sequelize.define('tortas', {
+    return sequelize.define('comunas', {
         id: {
             type: type.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        masaTipo_id: {
+        nombre: {
             type: type.STRING,
-            allowNull: false
+            ciudad: false
         },
-        masaSabor_id: {
+        ciudad: {
             type: type.STRING,
-            allowNull: false
-        },
-        sabor_id: {
-            type: type.STRING,
-            allowNull: false
+            ciudad: false
         },
         estado: {
             type: type.INTEGER(1),

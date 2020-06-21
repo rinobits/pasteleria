@@ -12,7 +12,7 @@ module.exports = (sequelize, type) => {
         },
         estado: {
             type: type.INTEGER(1),
-            allowNull: false
+            defaultValue: 1
         }
     })
 }
