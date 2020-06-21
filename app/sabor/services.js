@@ -11,7 +11,7 @@ class CargoServices{
     }
     saboresFindById(id){
         return new Promise((resolve, reject) => {
-            Sabores.findAll(id, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Sabores.findByPk(id)
                 .then(r => resolve({'cargo':r}))
                 .catch(e => reject(e));
         });
@@ -37,7 +37,7 @@ class CargoServices{
     }
     saboresDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Sabores.update(estado, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Sabores.update({estado: estado}, { where: {id: _id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

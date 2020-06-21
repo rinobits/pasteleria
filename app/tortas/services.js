@@ -11,7 +11,7 @@ class TortasServices{
     }
     tortasFindById(id){
         return new Promise((resolve, reject) => {
-            Tortas.findAll(id, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Tortas.findByPk(id)
                 .then(r => resolve({'cargo':r}))
                 .catch(e => reject(e));
         });
@@ -37,7 +37,7 @@ class TortasServices{
     }
     tortasDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Tortas.update(estado, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Tortas.update({estado: estado}, { where: {id: _id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

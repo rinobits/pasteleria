@@ -11,7 +11,7 @@ class TamanoServices{
     }
     tamanosFindById(id){
         return new Promise((resolve, reject) => {
-            Tamanos.findAll(id, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Tamanos.findByPk(id)
                 .then(r => resolve({'cargo':r}))
                 .catch(e => reject(e));
         });
@@ -37,7 +37,7 @@ class TamanoServices{
     }
     tamanosDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Tamanos.update(estado, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Tamanos.update({estado: estado}, { where: {id: _id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

@@ -1,4 +1,3 @@
-const Joi      = require('@hapi/joi');
 const boom     = require('@hapi/boom');
 
 const validate = (data, schema)  => {

@@ -10,7 +10,7 @@ class UserServices{
     }
     usersFindById(id){
         return new Promise((resolve, reject) => {
-            Users.findAll(id, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Users.findByPk(id)
                 .then(r => resolve({'user':r}))
                 .catch(e => reject(e));
         });
@@ -45,7 +45,7 @@ class UserServices{
     }
     usersDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Users.update(estado, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Users.update({estado: estado}, { where: {id: _id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

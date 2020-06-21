@@ -11,7 +11,7 @@ class CargoServices{
     }
     masaTipoFindById(id){
         return new Promise((resolve, reject) => {
-            MasaTipo.findAll(id, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            MasaTipo.findByPk(id)
                 .then(r => resolve({'cargo':r}))
                 .catch(e => reject(e));
         });
@@ -37,7 +37,7 @@ class CargoServices{
     }
     masaTipoDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            MasaTipo.update(estado, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            MasaTipo.update({estado: estado}, { where: {id: _id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

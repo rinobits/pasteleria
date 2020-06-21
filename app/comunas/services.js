@@ -11,7 +11,7 @@ class ComunaServices{
     }
     comunaFindById(id){
         return new Promise((resolve, reject) => {
-            Comuna.findAll(id, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Comuna.findByPk(id)
                 .then(r => resolve({'cargo':r}))
                 .catch(e => reject(e));
         });
@@ -37,7 +37,7 @@ class ComunaServices{
     }
     comunaDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Comuna.update(estado, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Comuna.update({estado: estado}, { where: {id: _id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

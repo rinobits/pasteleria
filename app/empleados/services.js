@@ -1,4 +1,5 @@
 const {Empleados}               = require('../../lib/database');
+const Op                        = require('sequelize');
 const bcrypt                    = require('bcrypt'); 
 class EmpleadoServices{
     empleadosFindAll(){
@@ -10,7 +11,7 @@ class EmpleadoServices{
     }
     empleadosFindById(id){
         return new Promise((resolve, reject) => {
-            Empleados.findAll(id, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Empleados.findByPk(id)
                 .then(r => resolve({'empleado':r}))
                 .catch(e => reject(e));
         });
@@ -34,9 +35,9 @@ class EmpleadoServices{
             .catch(e => reject(e));
         });
     }
-    empleadosDeleteById(id, estado = 0){
+    empleadosDeleteById(_id, estado = 0){
         return new Promise((resolve, reject) => {
-            Empleados.update(estado, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Empleados.update({estado: estado}, { where: {id: _id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

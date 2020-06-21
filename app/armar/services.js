@@ -9,7 +9,7 @@ class ArmarServices{
     }
     armarFindById(id){
         return new Promise((resolve, reject) => {
-            Armar.findAll(id, { where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Armar.findByPk(id)
             .then(r => resolve(r))
             .catch(e => reject(e));
         });
@@ -34,7 +34,7 @@ class ArmarServices{
     }
     armarDeleteById(id){
         return new Promise((resolve, reject) => {
-            Armar.destroy({ where: {[Op.and]: [{id: id}, {estado: 1}]}})
+            Armar.update({estado: estado}, { where: {id: _id}})
             .then(r => {
                 if(r == 1) resolve({"DELETE DATA": true})
                 else reject({"DELETE DATA:": false})
