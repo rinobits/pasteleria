@@ -37,7 +37,7 @@ class MasaSaborServices{
     }
     masaSaborDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            MasaSabor.update({estado: estado}, { where: {id: _id}})
+            MasaSabor.update({estado: estado}, { where: {id: id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

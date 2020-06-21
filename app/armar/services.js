@@ -34,7 +34,7 @@ class ArmarServices{
     }
     armarDeleteById(id){
         return new Promise((resolve, reject) => {
-            Armar.update({estado: estado}, { where: {id: _id}})
+            Armar.update({estado: estado}, { where: {id: id}})
             .then(r => {
                 if(r == 1) resolve({"DELETE DATA": true})
                 else reject({"DELETE DATA:": false})

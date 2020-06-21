@@ -37,7 +37,7 @@ class CargoServices{
     }
     cargosDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Cargos.update({estado: estado}, { where: {id: _id}})
+            Cargos.update({estado: estado}, { where: {id: id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

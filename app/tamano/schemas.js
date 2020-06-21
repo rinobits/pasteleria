@@ -4,14 +4,14 @@ const Joi      = require('@hapi/joi');
 const tamano   = Joi.string();
 const personas = Joi.string();
 const estado   = Joi.number().min(0).max(1);
-const id       = Joi.number().min(0);     
+const _id       = Joi.number().min(0);     
 
-const idSchema = Joi.object({
-    id: id.required()
+const idShema = Joi.object({
+    _id: _id.required()
 })
 const tamanoSchemaCreate = Joi.object({
-    tamano = tamano.required(),
-    personas = personas.required()
+    tamano   : tamano.required(),
+    personas : personas.required()
 })
 
 const tamanoSchemaUpdate = Joi.object({
@@ -20,11 +20,11 @@ const tamanoSchemaUpdate = Joi.object({
     estado
 });
 const tamanoSchemaDelete = Joi.object({
-    estado = estado.required()
+    estado: estado.required()
 })
 module.exports = {
     tamanoSchemaCreate,
     tamanoSchemaUpdate,
     tamanoSchemaDelete,
-    idSchema
+    idShema
 }

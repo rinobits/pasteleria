@@ -37,7 +37,7 @@ class CargoServices{
     }
     masaTipoDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            MasaTipo.update({estado: estado}, { where: {id: _id}})
+            MasaTipo.update({estado: estado}, { where: {id: id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

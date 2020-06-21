@@ -3,10 +3,10 @@ const Joi              = require('@hapi/joi');
 // consts
 const nombre           = Joi.string();
 const estado           = Joi.number().min(0).max(1);
-const id               = Joi.number().min(0);
+const _id               = Joi.number().min(0);
 
-const idSchema         = Joi.object({
-    id: id.required()
+const idShema         = Joi.object({
+    _id: _id.required()
 })
 const masaTipoSchemaCreate = Joi.object({
     nombre: nombre.required()
@@ -23,5 +23,5 @@ module.exports = {
     masaTipoSchemaCreate,
     masaTipoSchemaUpdate,
     masaTipoSchemaDelete,
-    idSchema
+    idShema
 }

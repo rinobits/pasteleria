@@ -37,7 +37,7 @@ class TamanoServices{
     }
     tamanosDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Tamanos.update({estado: estado}, { where: {id: _id}})
+            Tamanos.update({estado: estado}, { where: {id: id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

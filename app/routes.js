@@ -4,7 +4,7 @@ const express    = require('express');
 // imports & consts 
 const usuarios   = require('./usuarios/routes');
 const armar      = require('./armar/routes')
-const tamano     = require('./auth/routes');
+const tamano     = require('./tamano/routes');
 const tortas     = require('./tortas/routes');
 const auth       = require('./auth/routes');
 const sucursales = require('./sucursales/routes');

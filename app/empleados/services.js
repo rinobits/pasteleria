@@ -35,9 +35,9 @@ class EmpleadoServices{
             .catch(e => reject(e));
         });
     }
-    empleadosDeleteById(_id, estado = 0){
+    empleadosDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Empleados.update({estado: estado}, { where: {id: _id}})
+            Empleados.update({estado: estado}, { where: {id: id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

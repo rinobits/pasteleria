@@ -10,10 +10,10 @@ const value       = Joi.number().min(1).max(1000000);
 const deposit     = Joi.number().min(1).max(999999).allow("");
 const horaEntrega = Joi.string().min(2).max(5);
 const estado      = Joi.number().min(0).max(1);
-const id          = Joi.number().min(0);
+const _id          = Joi.number().min(0);
 
-const idSchema    = Joi.object({
-    id: id.required()
+const idShema    = Joi.object({
+    _id: _id.required()
 })
 const armarSchemaCreate = Joi.object({
     name:      name.required(),
@@ -47,5 +47,5 @@ module.exports = {
     armarSchemaCreate,
     armarSchemaUpdate,
     armarSchemaDelete,
-    idSchema
+    idShema
 }

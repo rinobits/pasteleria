@@ -45,7 +45,7 @@ class UserServices{
     }
     usersDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Users.update({estado: estado}, { where: {id: _id}})
+            Users.update({estado: estado}, { where: {id: id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

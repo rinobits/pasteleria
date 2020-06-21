@@ -37,7 +37,7 @@ class TortasServices{
     }
     tortasDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Tortas.update({estado: estado}, { where: {id: _id}})
+            Tortas.update({estado: estado}, { where: {id: id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});

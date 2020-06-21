@@ -1,12 +1,12 @@
 const Joi = require('@hapi/joi');
 
-const estado       = Joi.number().min(0).max(1);
-const masaTipo_id  = Joi.number().min(0);
-const masaSabor_id = Joi.number().min(0);
-const sabor_id     = Joi.number().min(0);
-const id           = Joi.number().min(0);
+const estado        = Joi.number().min(0).max(1);
+const masaTipo_id   = Joi.number().min(0);
+const masaSabor_id  = Joi.number().min(0);
+const sabor_id      = Joi.number().min(0);
+const id            = Joi.number().min(0);
 
-const idSchema     = Joi.object({
+const idShema     = Joi.object({
     id: id.required()
 })
 const tortaSchemaCreate = Joi.object({
@@ -28,5 +28,5 @@ module.exports = {
     tortaSchemaCreate,
     tortaSchemaUpdate,
     tortaSchemaDelete,
-    idSchema
+    idShema
 }

@@ -14,11 +14,11 @@ module.exports = (sequelize, type) => {
             type: type.STRING,
             allowNull: false
         },
-        apellidoPaterno: {
+        apell_idoPaterno: {
             type: type.STRING,
             allowNull: false
         },
-        apellidoMaterno: {
+        apell_idoMaterno: {
             type: type.STRING,
             allowNull: false
         },

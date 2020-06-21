@@ -35,7 +35,7 @@ class SucursalServices{
     }
     sucursalesDeleteById(id, estado = 0){
         return new Promise((resolve, reject) => {
-            Sucursales.update({estado: estado}, { where: {id: _id}})
+            Sucursales.update({estado: estado}, { where: {id: id}})
             .then(r => {
                 if(r == 1){
                     resolve({"MODIFY DATA:": true});
