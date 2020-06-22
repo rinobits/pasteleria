@@ -14,7 +14,7 @@ module.exports = (sequelize, type) => {
             type: type.STRING(255),
             allowNull: false
         },
-        empleado__id: {
+        empleado_id: {
             type:type.INTEGER,
             allowNull: false
         },
